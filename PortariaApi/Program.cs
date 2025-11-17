@@ -24,8 +24,6 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// ... resto do ficheiro
-
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
