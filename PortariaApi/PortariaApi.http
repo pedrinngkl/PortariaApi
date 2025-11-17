@@ -1,0 +1,6 @@
+@PortariaApi_HostAddress = http://localhost:5027
+
+GET {{PortariaApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
