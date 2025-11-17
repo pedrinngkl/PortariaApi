@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PortariaApi.Data;
 using PortariaApi.Models;
-using BCrypt.Net;
+//using BCrypt.Net;
 
 namespace PortariaApi.Controllers
 {
@@ -31,7 +31,7 @@ namespace PortariaApi.Controllers
                 // 2. FAÇA O HASH DA SENHA ANTES DE SALVAR
                 // O frontend envia a senha pura (ex: "123456") no campo SenhaHash
                 // Nós a substituímos pelo hash seguro.
-                novoMorador.SenhaHash = BCrypt.HashPassword(novoMorador.SenhaHash);
+                //novoMorador.SenhaHash = BCrypt.HashPassword(novoMorador.SenhaHash);
 
                 // 3. O resto do código continua igual
                 var apartamento = await _context.Apartamentos.FindAsync(novoMorador.FK_ApartamentoID);

@@ -10,24 +10,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         ServerVersion.AutoDetect(connectionString)
     )
 );
-// --- FIM DA SEÇÃO DO BANCO ---
 
+// --- ADICIONA O SERVIÇO DE CORS ---
+builder.Services.AddCors(options => // <-- NOVO
+{
+    options.AddPolicy("AllowReactApp", // <-- NOVO
+        policy => policy.WithOrigins("http://localhost:3000") 
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
 
-// Add services to the container.
 builder.Services.AddControllers();
-
-// LINHAS DO SWAGGER QUE FALTAVAM (SERVIÇOS)
-builder.Services.AddEndpointsApiExplorer(); // <-- NOVO
-builder.Services.AddSwaggerGen(); // <-- NOVO
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// LINHAS DO SWAGGER QUE FALTAVAM (APLICAÇÃO)
-// Estas linhas DEVEM vir antes de app.UseAuthorization()
-app.UseSwagger(); // <-- NOVO
-app.UseSwaggerUI(); // <-- NOVO
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.UseHttpsRedirection(); // Você pode ter esta linha
+
+app.UseCors("AllowReactApp"); // <-- NOVO (Diz ao app para USAR a política)
 
 app.UseAuthorization();
 app.MapControllers();
