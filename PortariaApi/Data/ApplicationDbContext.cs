@@ -15,8 +15,8 @@ namespace PortariaApi.Data
         public DbSet<Apartamento> Apartamentos { get; set; }
         public DbSet<Morador> Moradores { get; set; }
 
-        // Podemos adicionar Visitantes e Liberacoes aqui mais tarde
-        // public DbSet<Visitante> Visitantes { get; set; }
-        // public DbSet<Liberacao> Liberacoes { get; set; }
+    
+        public DbSet<Visitante> Visitantes { get; set; }
+        public DbSet<Liberacao> Liberacoes { get; set; }
     }
 }
