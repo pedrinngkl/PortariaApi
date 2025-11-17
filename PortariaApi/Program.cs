@@ -1,28 +1,33 @@
 using Microsoft.EntityFrameworkCore;
-using PortariaApi.Data; // Importa o nosso DbContext
+using PortariaApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- INÍCIO DA ADIÇÃO ---
-
-// 1. Obtém a Connection String
+// --- SEÃ‡ÃƒO DO BANCO DE DADOS ---
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// 2. Adiciona o DbContext como um serviço
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString,
-        ServerVersion.AutoDetect(connectionString) // Deteta a versão do MySQL
+        ServerVersion.AutoDetect(connectionString)
     )
 );
-
-// --- FIM DA ADIÇÃO ---
+// --- FIM DA SEÃ‡ÃƒO DO BANCO ---
 
 
 // Add services to the container.
 builder.Services.AddControllers();
-// ... resto do ficheiro (Swagger/OpenAPI, etc.)
+
+// LINHAS DO SWAGGER QUE FALTAVAM (SERVIÃ‡OS)
+builder.Services.AddEndpointsApiExplorer(); // <-- NOVO
+builder.Services.AddSwaggerGen(); // <-- NOVO
+
 
 var app = builder.Build();
+
+// LINHAS DO SWAGGER QUE FALTAVAM (APLICAÃ‡ÃƒO)
+// Estas linhas DEVEM vir antes de app.UseAuthorization()
+app.UseSwagger(); // <-- NOVO
+app.UseSwaggerUI(); // <-- NOVO
+
 
 app.UseAuthorization();
 app.MapControllers();
